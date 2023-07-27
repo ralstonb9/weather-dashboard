@@ -12,6 +12,9 @@ $(document).ready(function(){
             history.append(historyBtn);
         }
 
+        $(".history-btn").on("click", function() {
+            searchForCity($(this).text());
+        })
     }
     
     $("#search-button").on("click", function() {
