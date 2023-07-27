@@ -5,7 +5,10 @@ $(document).ready(function(){
 
     function showSearchHistory() {
         var history = $("#search-history");
-        
+        for (i=0; i < searchHistory.length; i++){
+            
+        }
+
     }
     
     $("#search-button").on("click", function() {
@@ -39,12 +42,13 @@ function searchForCity(cityName) {
                 })
                 .then(function(data) {
                     console.log(data);
+                    var date = dayjs(data.list[0].dt_txt).format('MMM D, YYYY')
                     var todaysWeather = document.getElementById('current-forecast');
                     todaysWeather.style.height = 'auto'
                     document.getElementById('current-forecast').innerHTML=
                     `
                     <ul>
-                    <h3>${cityName}(${data.list[0].dt_txt})</h3><img src=https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png />
+                    <h3>${cityName}(${date})</h3><img src=https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png />
                     <li>Temp: ${data.list[0].main.temp} °F</li>
                     <li>${data.list[0].wind.speed} MPH</li>
                     <li>${data.list[0].main.humidity}%</li>
@@ -53,41 +57,21 @@ function searchForCity(cityName) {
                 
                 for (var i=2; i < data.list.length; i+=8) {
                     console.log(data.list[i])
-                    document.getElementById('future').innerHTML=
+                    document.getElementById('forecast').innerHTML=
                     `
                     <ul>
-                    <h5>${data.list[i].dt_txt}</h5><img src=https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png />
+                    <h5>${date}</h5><img src=https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png />
                     <li>Temp: ${data.list[i].main.temp} °F</li>
                     <li>${data.list[i].wind.speed} MPH</li>
-                    <li>${data.list[i].main.humidity}</li>
+                    <li>${data.list[i].main.humidity}%</li>
                     </ul>
                     `
                 }
                 
                 
-                    //     var currentForecast = document.getElementById("current-forecast");
-                //     var weatherDisplay = displayWeatherData(data.list[0], data.city.name, true);
-                //     currentForecast.style.height = "auto";
-                //     currentForecast.innerHTML = weatherDisplay;
-                //     for (var i=0; i < 5; i++)
-                //         var forecastDisplay = displayWeatherData(data.list[i * 8 +1], data.city.name, false);
+                   
                 })
-            // function displayWeatherData(data, cityName, isCurrent) {
-                // var windSpeed = data.wind.speed;
-                // var humidity = data.main.humidity;
-                // var temperature = data.main.temp;
-                // var date = data.dt;
-                // var weatherImage = `https://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png`
-
-                // if (isCurrent) {
-                //     header = "<h3>" + cityName + " (" + date + ')<img src="' + weatherImage + '" alt="' + data.weather[0].description + '/><h3>';
-                // } else {
-                //     header = "<h5>" + cityName + '<img src="' + weatherImage + '" alt="' + data.weather[0].description + '" /><h5>';
-                // }
-
-                // var weatherDisplayText = header + "<p>Temp: " + temperature + " °F</p>" + "<p>Wind: " + windSpeed + " mph</p>" + "<p>Humidity: " + humidity + " %</p>";
-                // return weatherDisplayText;
-            // }
+            
         
         })
 
