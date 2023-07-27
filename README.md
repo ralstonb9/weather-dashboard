@@ -10,7 +10,7 @@ This weeks challenge was to create an app that can tell you the weather based on
 
 ## Screenshot
 
-
+![current weather display](./assets/images/weather-dashboard.png)
 
 ## Usage
 

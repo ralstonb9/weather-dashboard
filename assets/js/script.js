@@ -6,7 +6,10 @@ $(document).ready(function(){
     function showSearchHistory() {
         var history = $("#search-history");
         for (i=0; i < searchHistory.length; i++){
-            
+            var historyBtn = $("<button>");
+            historyBtn.text(searchHistory[i]);
+            historyBtn.addClass("history-btn");
+            history.append(historyBtn);
         }
 
     }
@@ -14,6 +17,11 @@ $(document).ready(function(){
     $("#search-button").on("click", function() {
         var userInput = $("#search-input").val();
     
+        if (userInput && !searchHistory.includes(userInput)) {
+            searchHistory.push(userInput);
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+            showSearchHistory();
+          }
         if (userInput) {
             searchForCity(userInput);
         }
